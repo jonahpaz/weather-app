@@ -1,0 +1,126 @@
+* {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+body {
+    min-height: 100vh;
+    display: grid;
+}
+.page {
+    position: relative;
+    display: grid;
+    place-content: center;
+    width: 100;
+    background-color: black;
+    color: white;
+}
+.container {
+    display: grid;
+    gap: 1rem;
+}
+img {
+    /* z-index: 0; */
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0.35;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+form {
+    border: 2px solid white;
+    padding: 0.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    input {
+        border-radius: 50px;
+        flex: 1;
+        padding: 0.5rem 1rem;
+    }
+    button {
+        border-radius: 50px;
+        padding: 0.5rem 1rem;
+    }
+}
+.weather {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 1rem;
+    display: grid;
+    place-items: center;
+    row-gap: 2rem;
+    grid-template-areas: 
+        "title feel"
+        "time time"
+        "desc desc";
+    ul {
+        width: 100%;
+        border: 2px solid white;
+
+        display: grid;
+        gap: 0.5rem;
+        place-items: center;
+    }
+    & > .title {
+        grid-area: title;
+        font-size: 4rem;
+    }
+    & > .feel {
+        grid-area: feel;
+        grid-template-areas: 
+            "temp temp"
+            "humid feels";
+        .temp {
+            font-size: 4rem;
+            grid-area: temp;
+        }
+        .humidity {
+            grid-area: humid;
+        }
+        .feelslike {
+            grid-area: feels;
+        }
+    }
+    & > .time {
+        grid-area: time;
+        grid-template-areas: 
+            "time time"
+            "sunrise sunset";
+        .time {
+            grid-area: time;
+            font-size: 3rem;
+        }
+        .sunrise {
+            grid-area: sunrise;
+        }
+        .sunset {
+            grid-area: sunset;
+        }
+    }
+    & > .description {
+        grid-area: desc;
+    }
+
+    li {
+        padding: 0.5rem;
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+
+        span {
+            background-color: rgb(39, 7, 7);
+            border-radius: 50px;
+        }
+    }
+}
+.credits {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
