@@ -2,36 +2,62 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    border-color: transparent;
+    background-color: transparent;
+    color: inherit;
+    border-width: 0;
+    --clamp-font-size: clamp(1rem, 1rem + 4vw, 4rem);
 }
 body {
     min-height: 100vh;
     display: grid;
 }
 .page {
+    min-height: 100%;
     position: relative;
+    padding: 1rem 0;
     display: grid;
     place-content: center;
     width: 100;
     background-color: black;
     color: white;
+
+    * {
+        text-shadow: 0 0 10px rgb(0, 0, 0);
+    }
 }
-.container {
+.content {
+    z-index: 1;
+    width: clamp(350px, 60vw, 700px);
+    padding: 1rem;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
     display: grid;
     gap: 1rem;
+
+    & > * {
+        /* width: 100%; */
+    }
 }
 img {
-    /* z-index: 0; */
     position: absolute;
     inset: 0;
     margin: 0;
-    opacity: 0.35;
     width: 100%;
+    min-height: 100vh;
     height: 100%;
     object-fit: cover;
     pointer-events: none;
+    background-color: black;
+    /* transition: 0.5s ease;
+    .loading {
+        opacity: 0;
+    } */
 }
 form {
-    border: 2px solid white;
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 0.5rem;
     border-radius: 50px;
     display: flex;
@@ -45,22 +71,38 @@ form {
     button {
         border-radius: 50px;
         padding: 0.5rem 1rem;
+        background-color: rgba(0, 0, 0, 0.5);
+
+        transition: 0.2s;
+        &:active {
+            transform: scale(0.95);
+        }
     }
 }
 .weather {
-    border: 2px solid white;
+    background-color: rgba(0, 0, 0, 0.4);
     border-radius: 20px;
     padding: 1rem;
+
+    /* transition: 0.5s;
+    transition: 0.5s ease;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    .loading {
+        opacity: 0;
+        grid-template-rows: 0fr;
+    } */
+
     display: grid;
     place-items: center;
-    row-gap: 2rem;
+    gap: 2rem;
     grid-template-areas: 
         "title feel"
         "time time"
-        "desc desc";
+        "desc desc"
+        "alert alert";
     ul {
         width: 100%;
-        border: 2px solid white;
 
         display: grid;
         gap: 0.5rem;
@@ -68,22 +110,13 @@ form {
     }
     & > .title {
         grid-area: title;
-        font-size: 4rem;
+        font-size: var(--clamp-font-size);
     }
     & > .feel {
         grid-area: feel;
-        grid-template-areas: 
-            "temp temp"
-            "humid feels";
         .temp {
-            font-size: 4rem;
-            grid-area: temp;
-        }
-        .humidity {
-            grid-area: humid;
-        }
-        .feelslike {
-            grid-area: feels;
+            font-size: var(--clamp-font-size);
+            min-width: max-content;
         }
     }
     & > .time {
@@ -105,16 +138,19 @@ form {
     & > .description {
         grid-area: desc;
     }
+    & > .alerts {
+        grid-area: alert;
+    }
 
     li {
         padding: 0.5rem;
         width: 100%;
         display: flex;
+        flex-wrap: wrap;
         gap: 1rem;
         justify-content: center;
 
         span {
-            background-color: rgb(39, 7, 7);
             border-radius: 50px;
         }
     }
